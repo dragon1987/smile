@@ -1,0 +1,51 @@
+<div class="panel-body" style="padding-bottom:0px;">
+    <div class="panel panel-default">
+        <div class="panel-heading">查询条件</div>
+        <div class="panel-body">
+            <input type="hidden" class="form-control" name="UserId" id="userId" value="${userId}">
+            <form id="searchBindForm" class="form-horizontal">
+
+                <div class="form-group" style="margin-top:15px">
+                    <label class="control-label col-sm-1" for="searchBindName">名称</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="name" id="searchBindName">
+                    </div>
+                    <div class="col-sm-4" style="text-align:left;">
+                        <button type="button" style="margin-left:50px" id="searchBindButton" class="btn btn-primary">查询
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="wrapper wrapper-content">
+    <div class="ibox-content ">
+        <table id="bindGroupTable"></table>
+    </div>
+</div>
+
+
+<script>
+    $(function () {
+        $('#bindGroupTable').bootstrapTable({
+            columns: [{
+                checkbox: true
+            }, {
+                field: 'id',
+                title: 'id'
+            }, {
+                field: 'name',
+                title: '名称'
+            }, {
+                field: 'code',
+                title: '代码'
+            }],
+            url: '${base}/user/group/findUnbind/'+$("#userId").val(),         //请求后台的URL（*）
+            searchForm: "#searchBindForm",
+            searchButton: "#searchBindButton",
+            showRefresh: false,
+            showColumns: false,
+        });
+    });
+</script>

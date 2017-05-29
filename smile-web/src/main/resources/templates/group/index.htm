@@ -1,0 +1,97 @@
+<@html.html>
+<div class="panel-body" style="padding-bottom:0px;">
+    <div class="panel panel-default">
+        <div class="panel-heading">查询条件</div>
+        <div class="panel-body">
+            <form id="searchForm" class="form-horizontal">
+                <div class="form-group" style="margin-top:15px">
+                    <label class="control-label col-sm-1" for="name">名称</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="name" id="name">
+                    </div>
+                    <div class="col-sm-4" style="text-align:left;">
+                        <button type="button" style="margin-left:50px" id="searchButton" class="btn btn-primary">查询
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="wrapper wrapper-content">
+    <div class="ibox-content ">
+        <div class="btn-group hidden-xs" id="toolbar" role="group">
+            <button id="add" type="button" class="btn btn-outline btn-default">
+                <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
+            </button>
+            <button id="edit" type="button" class="btn btn-outline btn-default">
+                <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i>
+            </button>
+            <button id="del" type="button" class="btn btn-outline btn-default">
+                <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+            </button>
+        </div>
+        <table id="table"></table>
+    </div>
+</div>
+
+
+<script>
+    $(function () {
+        $('#table').bootstrapTable({
+            columns: [{
+                checkbox: true
+            }, {
+                field: 'id',
+                title: 'id'
+            }, {
+                field: 'name',
+                title: '名称'
+            }, {
+                field: 'code',
+                title: '代码'
+            }],
+            url: '${base}/group/find',         //请求后台的URL（*）
+            toolbar: '#toolbar',             //工具按钮用哪个容器
+            searchForm: "#searchForm",
+            searchButton: "#searchButton",
+        });
+
+
+        openWin({
+                    tableGrid: "#table",
+                    form: "#addForm",
+                    type: "add",
+                    button: "#add",
+                    url: "${base}/group/add/index",
+                    title: '新增角色',
+                    area: ['300px', '220px'],
+                    btn: ['确认', '取消'],
+                }
+        )
+
+        openWin({
+                    tableGrid: "#table",
+                    form: "#editForm",
+                    type: "edit",
+                    button: "#edit",
+                    url: "${base}/group/edit/index",
+                    title: '编辑角色',
+                    area: ['300px', '220px'],
+                    btn: ['确认', '取消'],
+                }
+        )
+
+        openWin({
+                    tableGrid: "#table",
+                    type: "del",
+                    button: "#del",
+                    url: "${base}/group/del",
+                    title: '删除角色',
+                    context: "确认删除角色？"
+                }
+        )
+
+    });
+</script>
+</@html.html>

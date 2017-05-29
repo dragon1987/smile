@@ -1,0 +1,76 @@
+<@html.html>
+<div class="panel-body" style="padding-bottom:0px;">
+    <div class="panel panel-default">
+        <div class="panel-heading">查询条件</div>
+        <div class="panel-body">
+            <form id="searchForm" class="form-horizontal">
+                <div class="form-group" style="margin-top:15px">
+                    <label class="control-label col-sm-1" for="deviceId">设备id</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="deviceId" id="deviceId">
+                    </div>
+                    <div class="col-sm-4" style="text-align:left;">
+                        <button type="button" style="margin-left:50px" id="searchButton" class="btn btn-primary">查询
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="wrapper wrapper-content">
+    <div class="ibox-content ">
+        <table id="table"></table>
+    </div>
+</div>
+
+
+<script>
+    $(function () {
+        $('#table').bootstrapTable({
+            columns: [{
+                checkbox: true
+            }, {
+                field: 'id',
+                title: 'id'
+            }, {
+                field: 'deviceId',
+                title: '设备id'
+            }, {
+                field: 'windSpeed',
+                title: '风速'
+            },{
+                field: 'windDirection',
+                title: '风向'
+            }, {
+                field: 'barometer',
+                title: '气压'
+            }, {
+                field: 'temperature',
+                title: '温度'
+            }, {
+                field: 'pm25',
+                title: 'pm2.5'
+            }, {
+                field: 'channel',
+                title: '通道'
+            }, {
+                field: 'noise',
+                title: '噪声'
+            }, {
+                field: 'humidity',
+                title: '湿度'
+            }, {
+                field: 'pm10',
+                title: 'pm10'
+            }, {
+                field: 'reportTime',
+                title: '上报时间'
+            }],
+            url: '${base}/wavelab/record/find',         //请求后台的URL（*）
+            searchForm: "#searchForm",
+            searchButton: "#searchButton",
+        });
+    });
+</script>
+</@html.html>

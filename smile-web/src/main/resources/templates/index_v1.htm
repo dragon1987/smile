@@ -1,0 +1,105 @@
+<@html.html>
+<div class="panel-body" style="padding-bottom:0px;">
+    <div class="panel panel-default">
+        <div class="panel-heading">查询条件</div>
+        <div class="panel-body">
+            <form id="formSearch" class="form-horizontal">
+                <div class="form-group" style="margin-top:15px">
+                    <label class="control-label col-sm-1" for="txt_search_departmentname">部门名称</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="txt_search_departmentname">
+                    </div>
+                    <label class="control-label col-sm-1" for="txt_search_statu">状态</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="txt_search_statu">
+                    </div>
+                    <div class="col-sm-4" style="text-align:left;">
+                        <button type="button" style="margin-left:50px" id="btn_query" class="btn btn-primary">查询
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-top:15px">
+                    <label class="control-label col-sm-1" for="txt_search_departmentname1">部门名称</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="txt_search_departmentname1">
+                    </div>
+                    <label class="control-label col-sm-1" for="txt_search_statu1">状态</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="txt_search_statu1">
+                    </div>
+                    <div class="col-sm-4" style="text-align:left;">
+                        <button type="button" style="margin-left:50px" class="btn btn-primary">查询
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="wrapper wrapper-content">
+    <div class="ibox-content ">
+        <div class="btn-group hidden-xs" id="exampleToolbar" role="group">
+            <button id="add" type="button" class="btn btn-outline btn-default" >
+                <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn btn-outline btn-default">
+                <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn btn-outline btn-default">
+                <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+            </button>
+        </div>
+        <table id="table"></table>
+    </div>
+</div>
+
+<script>
+    $('#add').on('click', function(){
+        layer.open({
+            type: 1,
+            closeBtn: 1,
+            area: ['600px', '360px'],
+            content: '\<\div style="padding:20px;">自定义内容\<\/div>',
+        });
+    });
+
+    $('#table').bootstrapTable({
+        columns: [{
+            checkbox: true
+        }, {
+            field: 'name',
+            title: '名称'
+        }, {
+            field: 'star',
+            title: 'Star'
+        }, {
+            field: 'license',
+            title: '许可'
+        }, {
+            field: 'description',
+            title: '描述'
+        }, {
+            field: 'url',
+            title: '地址'
+        }],
+        url: '/resources/js/demo/bootstrap_table_test2.json',         //请求后台的URL（*）
+        method: 'get',                      //请求方式（*）
+        toolbar: '#exampleToolbar',             //工具按钮用哪个容器
+        uniqueId: "id",                     //每一行的唯一标识，一般为主键列
+        pagination: true,                   //是否显示分页（*）
+        queryParams: function (params) {
+            return params
+        },//传递参数（*）
+        pageNumber: 1,                       //初始化加载第一页，默认第一页
+        pageSize: 20,                       //每页的记录行数（*）
+        pageList: [10, 20, 50],        //可供选择的每页的行数（*）
+        showRefresh: true,
+        showColumns: true,
+        iconSize: "outline",
+        icons: {
+            refresh: "glyphicon-repeat",
+            columns: "glyphicon-list"
+        }
+    });
+</script>
+</@html.html>

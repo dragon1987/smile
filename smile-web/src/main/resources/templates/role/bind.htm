@@ -1,0 +1,48 @@
+<link rel="stylesheet" href="${base}/resources/js/plugins/ztree/css/ztree.css"/>
+
+
+<div class="ibox float-e-margins">
+    <div class="ibox-title">
+        <h5>角色信息</h5>
+    </div>
+    <div class="ibox-content">
+        <div style="">
+            <div style="display:inline;">名称:</div>
+            <div style="display:inline;">${role.name}</div>
+        </div>
+        <div style="">
+            <div style="display:inline;">编码:</div>
+            <div style="display:inline;">${role.code}</div>
+        </div>
+    </div>
+</div>
+
+
+<div class="ibox float-e-margins">
+    <div class="ibox-title">
+        <h5>权限信息</h5>
+    </div>
+    <div class="ibox-content">
+        <div id="permissionTree" class="ztree"></div>
+    </div>
+</div>
+
+
+<script src="${base}/resources/js/plugins/ztree/js/jquery.ztree.js"></script>
+<SCRIPT type="text/javascript">
+    var setting = {
+        check: {
+            enable: true
+        },
+        data: {
+            simpleData: {
+                enable: true
+            }
+        }
+    };
+    var zNodes =${zTree};
+    $(document).ready(function () {
+        $.fn.zTree.init($("#permissionTree"), setting, zNodes);
+    });
+
+</SCRIPT>

@@ -1,0 +1,304 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="icon" href="${base}/favicon.ico"/>
+<title>首页 - 供应链管理系统</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- basic styles -->
+<link rel="stylesheet" href="${base}/framework/css/font-awesome.min.css" />
+<link rel="stylesheet" href="${base}/framework/css/bootstrap.css" />
+<link rel="stylesheet" href="${base}/framework/css/jquery-ui.min.css" />
+<link rel="stylesheet" href="${base}/framework/css/ace.min.css" />
+<link rel="stylesheet" href="${base}/framework/css/scm.framework.css" />
+
+<style type="text/css">
+.nav-list li ul.submenu li.findit>a {
+	color: #4b88b7;
+}
+</style>
+</head>
+<body>
+	<div class="navbar navbar-default" id="navbar">
+		<div class="navbar-container clearfix" id="navbar-container">
+			<div class="navbar-header head-image"></div>
+			<span class="banner-text">云岛信息管理系统</span>
+			<!-- /.navbar-header -->
+
+			<div class="navbar-header pull-right" role="navigation">
+				<ul class="nav ace-nav">
+					<li>
+	                    <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:">用户管理</a>
+	                </li>
+	                <li>
+	                    <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:">模块管理</a>
+	                </li>
+	                <li>
+	                    <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:">系统管理</a>
+	                </li>
+					<li class="light-blue">
+						<a data-toggle="dropdown" href="javascript:" class="dropdown-toggle">
+							<img class="nav-user-photo" src="${base}/framework/images/avatars/user.jpg" alt="Jason's Photo" />
+							<span class="user-info">${(user.name)!}</span><i class="icon-caret-down"></i>
+						</a>
+						<ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+							<li><a href="javascript:"><i class="icon-cog"></i>设置</a></li>
+							<li><a href="javascript:"><i class="icon-user"></i>个人资料</a></li>
+							<li><a href="javascript:" id="about"><i class="icon-user"></i>关于</a></li>
+							<li class="divider"></li>
+							<li><a href="${base}/logout"><i class="icon-off"></i>退出</a></li>
+						</ul>
+					</li>
+				</ul>
+				<!-- /.ace-nav -->
+			</div>
+			<!-- /.navbar-header -->
+		</div>
+		<!-- /.container -->
+	</div>
+
+
+	<div class="main-container" id="main-container">
+		<div class="main-container-inner">
+			<a class="menu-toggler" id="menu-toggler" href="javascript:"><span class="menu-text"></span></a>
+			<div class="sidebar" id="sidebar">
+				<div id="menu-slim-scroll" class="slim-scroll">
+					<div id="nav-search" class="nav-search">
+						<div class="input-icon">
+							<i class="icon-search"></i><i class="nav-search-icon"></i>
+							<input type="text" placeholder="Search ..." class="nav-search-input" autocomplete="off" />
+						</div>
+					</div>
+					<!-- #sidebar-shortcuts -->
+					<ul class="nav nav-list">
+						<#list zTree.nodes as node>
+							<li>
+								<a href="${node.url}" class="dropdown-toggle">
+									<#if node.menuIcon?? && node.menuIcon!=''>
+										<i class="${node.menuIcon}"></i> <#else> <i class="icon-desktop"></i>
+									</#if>
+									<span class="menu-text">${node.name}</span><b class="arrow icon-angle-down"></b>
+								</a>
+								<ul class="submenu">
+									<#list node.subNodes as subNode>
+										<#if (subNode.subNodes?size > 0)>
+											<li>
+												<a href="${subNode.url}" class="dropdown-toggle">
+													<i class="icon-double-angle-right"></i><span class="menu-text">${subNode.name}</span>
+												</a>
+												<ul class="submenu">
+													<#list subNode.subNodes as subSubNode>
+													<li>
+														<a href="${subSubNode.url}" target="mainFrame">
+															<i class="icon-double-angle-right"></i>
+															<span class="menu-text">${subSubNode.name}</span>
+														</a>
+													</li>
+													</#list>
+												</ul>
+											</li>
+										<#else>
+											<li>
+												<a href="${subNode.url}" target="mainFrame">
+													<i class="icon-double-angle-right"></i>
+													<span class="menu-text">${subNode.name}</span>
+												</a>
+											</li>
+										</#if>
+									</#list>
+								</ul>
+							</li>
+						</#list>
+					</ul>
+					<div class="sidebar-collapse" id="sidebar-collapse">
+						<i id="icon-double-angle" class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+					</div>
+				</div>
+			</div>
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"></i> <a href="javascript:">首页</a></li>
+					</ul>
+					<!-- .breadcrumb -->
+				</div>
+				<div class="page-content">
+					<iframe id="rightFrame" frameborder="0" width="100%" scrolling="auto" style="padding: 0px; width: 100%;" id="frame_content" name="mainFrame" src="${base}/welcome"></iframe>
+				</div>
+				<!-- /.page-content -->
+			</div>
+			<!-- /.main-content -->
+			<!-- /#ace-settings-container -->
+		</div>
+		<!-- /.main-container-inner -->
+	</div>
+	<!-- /.main-container -->
+
+
+	<script src="${base}/framework/js/jquery.min.js"></script>
+	<script src="${base}/framework/js/jquery-ui.min.js"></script>
+	<script src="${base}/framework/js/bootstrap.min.js"></script>
+	<script src="${base}/framework/js/ace-extra.js"></script>
+	<script src="${base}/framework/js/ace.min.js"></script>
+    <script src="${base}/framework/js/jquery.slimscroll.min.js"></script>
+	<script src="${base}/framework/js/jquery-ui.extends.js"></script>
+	<script type="text/javascript">
+
+    $("#about").click(function () {
+        $.jqopenDialog("${base}/about", {dlgWidth: 700, dlgHeight: 180, dlgTitle: "关于我们"}, false);
+    });
+
+    function resizeIfm() {
+        var ifm = $("#rightFrame");
+        if (ifm.length > 0) {
+            $(ifm).css("height", $(window).height() - 80);
+        }
+    }
+    function resizeMenuBar() {
+        $("div.slimScrollDiv,div#menu-slim-scroll").each(function () {
+            var container = $(this);
+            if (container) {
+                container.height($(window).height() - 50);
+            }
+        });
+    }
+
+    function resizeAll() {
+        resizeMenuBar();
+        resizeIfm();
+    }
+    $(window).resize(resizeAll);
+    (function ($) {
+        $(resizeIfm);
+    })(jQuery);
+
+
+    var supplySystem = {
+        //二级类目展开
+        leftMenu: function () {
+            var lis = $(".submenu  ").find("li");
+            for (var i = 0; i < lis.length; i++) {
+                var li = $(lis[i]);
+                if (li.find(".submenu").length == 0) {
+                    li.not(".submenu").click(function () {
+                        $(this).parent().parent().parent().find("li").removeClass("active");
+                    });
+                    li.not(":has(ul)").click(function () {
+                        $(this).parent().parent().parent().parent().parent().find("li").removeClass("active");
+                        $(this).addClass("active");
+                    })
+                }
+            }
+        },
+        //导航搜索
+        navSearch: function () {
+
+	        var MENU_STATES = [];
+	        <#list zTree.nodes as node>
+	            <#if (node.subNodes?size > 0)>
+	                <#list  node.subNodes as subNode>
+	                    <#if (subNode.subNodes?size > 0)>
+	                        <#list  subNode.subNodes as subSubNode>
+	                            MENU_STATES.push({
+	                                label: "${subSubNode.name}",
+	                                pos: "${node_index+1}-${subNode_index+1}-${subSubNode_index+1}"
+	                            });
+	                        </#list>
+	                    <#else>
+	                        MENU_STATES.push({label: "${subNode.name}", pos: "${node_index+1}-${subNode_index+1}"});
+	                    </#if>
+	                </#list>
+	            <#else>
+	                MENU_STATES.push({label: "${node.name}", pos: "${node_index+1}"});
+	            </#if>
+	        </#list>
+
+            $(".nav-search-input").autocomplete({
+                source: MENU_STATES,
+                delay: 300,
+                select: function (event, ui) {
+                    findPos(ui.item)
+                }
+            });
+
+            $(".nav-search-input").bind('keypress', function (e) {
+                if (e.keyCode === 13) {
+                    var searchNode = '';
+                    for (var a in MENU_STATES) {
+                        if ($(this).val() === MENU_STATES[a].label) {
+                            searchNode = MENU_STATES[a];
+                            break;
+                        }
+                    }
+                    if (searchNode !== '') {
+                        findPos(searchNode);
+                    }
+                    return false;
+                }
+            });
+
+            function findPos(searchNode) {
+                var rootNode = $('.nav-list');
+                var posArr = searchNode.pos.split('-');
+                var myLeaf = '';
+                rootNode.find('li').removeClass('findit');
+                rootNode.find('ul').hide();
+                for (var i = 0, myNode = rootNode; i < posArr.length; i++) {
+                    myLeaf = myNode.children('li').eq(posArr[i] - 1);
+                    myNode = myLeaf.children('.submenu');
+                    if (myNode.length === 0) {
+                        myLeaf.addClass('findit');
+                    } else {
+                        myNode.show();
+                        var lis = myNode.children('li');
+                        for (var j = 0; j < lis.length; j++) {
+                            var span = $(lis[j]).find('span').text().trim();
+                            if (span === searchNode.label.trim()) {
+                                var link = $(lis[j]);
+                                var href = link.find("a[target='mainFrame']").attr("href");
+                                if (href !== undefined || href !== "") {
+                                    link.click();
+                                    $("#rightFrame").attr("src", href);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    $(function () {
+        supplySystem.leftMenu();
+        supplySystem.navSearch();
+
+        $('.nav-list').find("a[target='mainFrame']").each(function (i, el) {
+            $(el).bind("click", function (e) {
+                var href = $(this).attr("href");
+                if (href === undefined || href === "") {
+                    return false;
+                }
+                return true;
+            });
+        });
+
+        $('#menu-slim-scroll').slimScroll({
+            height: $(this).data('height') || $(window).height() - 50,
+            railVisible: true,
+            wheelStep: 1
+        });
+    });
+    $("#sidebar-collapse").click(function () {
+        if ($(this).find(".icon-double-angle-left").length > 0) {
+            $("#menu-slim-scroll").css("overflow", "visible");
+            $(".slimScrollDiv").css("overflow", "visible")
+
+        } else {
+            $("#menu-slim-scroll").css("overflow", "hidden");
+            $(".slimScrollDiv").css("overflow", "hidden")
+        }
+    });
+</script>
+
+
+</body>
+</html>

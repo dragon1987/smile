@@ -1,0 +1,120 @@
+<@html.html>
+<link rel="stylesheet" href="${base}/js/plugins/ztree/css/ztree.css"/>
+<style type="text/css">
+    span.addBranch {
+        background-image: url("${base}/framework/images/addBranch.png");
+    }
+
+    span.addMenu {
+        background-image: url("${base}/framework/images/addMenu.png");
+    }
+
+    /*#permissionsView {*/
+    /*position:fixed;*/
+    /*left:45%;*/
+    /*}*/
+</style>
+<div class="row" style="margin-top: 20px;margin-left: 20px">
+    <div class="col-sm-4">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                菜单管理
+            </div>
+            <div class="panel-body">
+                <ul id="permissionsTree" class="ztree"></ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4 col-md-offset-1" id="permissionsView">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                菜单信息
+            </div>
+            <div class="panel-body">
+                <form id="permissionForm" action="${base}/menu/edit" class="form-horizontal" method="post">
+                    <input type="hidden" id="id" name="id"/>
+                    <input type="hidden" id="level" name="level"/>
+                    <input type="hidden" id="pId" name="pId"/>
+                    <input type="hidden" id="menuLevel" name="menuLevel"/>
+                    <input type="hidden" id="tId" name="tId"/>
+                    <div class="form-group">
+                        <label class="control-label col-xs-3" for="name">名称:</label>
+                        <div class="col-xs-6">
+                            <input type="text" required="true" class="form-control" name="name" id="name">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-xs-3" for="code">权限码：</label>
+                        <div class="col-xs-6">
+                            <input type="text" required="true" class="form-control" id='code' name="code">
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="menuUrlCheck">
+                        <label class="control-label col-xs-3" for="menuUrl">URL：</label>
+                        <div class="col-xs-6">
+                            <input type="text" required="true" class="form-control" id='menuUrl' name="menuUrl">
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="systemIdCheck">
+                        <label class="control-label col-xs-3" for="systemId">系统id：</label>
+                        <div class="col-xs-6">
+                            <input type="text"  class="form-control" id='systemId' name="systemId">
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="iconCheck">
+                        <label class="control-label col-xs-3" for="menuIcon">Icon：</label>
+                        <div class="col-xs-6">
+                            <input type="text"  class="form-control" id='menuIcon' name="menuIcon">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-xs-3" for="isHidden">是否隐藏:</label>
+                        <div class="col-xs-6">
+                            <select data-placeholder="请选择..." class="chosen-select form-control" name="isHidden"
+                                    id="isHidden">
+                                <option value="0">显示</option>
+                                <option value="1">隐藏</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-xs-3" for="levelOrder">排序：</label>
+                        <div class="col-xs-6">
+                            <input type="text" required="true" class="form-control" id='levelOrder' name="levelOrder"
+                                   digits="true" placeholder="请输入数字">
+                        </div>
+                    </div>
+
+                    <!--表单操作-->
+                    <div class="form-group">
+                        <div class="col-sm-offset-4">
+                            <button type="button" id="confirm" class="btn btn-primary">保存</button>
+                            <button type="button" id="cancel" class="btn col-sm-offset-1">取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+    var zNodes =${zTree};
+    zNodes.push({
+        "id": "0",
+        "pId": "",
+        "name": "菜单",
+        open: true,
+        "icon": "${base}/framework/images/home.png",
+        "menuLevel": 1
+    })
+</script>
+<script src="${base}/js/plugins/ztree/js/jquery.ztree.js"></script>
+<script type="text/javascript" src="${base}/framework/js/menu.js"></script>
+</@html.html>
