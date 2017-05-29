@@ -98,7 +98,6 @@ public class UserRealm extends AuthorizingRealm {
     }
 
     @Override
-
     public void clearCache(PrincipalCollection principals) {
         super.clearCache(principals);
     }
