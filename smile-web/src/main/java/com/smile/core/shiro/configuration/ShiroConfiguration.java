@@ -18,6 +18,7 @@
  */
 package com.smile.core.shiro.configuration;
 
+
 import com.smile.core.service.SysPermissionService;
 import com.smile.core.service.SysRoleService;
 import com.smile.core.service.SysUserService;
@@ -125,4 +126,5 @@ public class ShiroConfiguration {
         shiroFilterFactoryBean.setFilterChainDefinitionMap(shiroFilterChainDefinition.getFilterChainMap());
         return shiroFilterFactoryBean;
     }
+
 }
