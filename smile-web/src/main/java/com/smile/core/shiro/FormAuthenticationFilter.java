@@ -167,6 +167,27 @@ public class FormAuthenticationFilter extends AuthenticatingFilter {
         }
     }
 
+
+    protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
+        if (isLoginRequest(request, response)) {
+            if (isLoginSubmission(request, response)) {
+                if (log.isTraceEnabled()) {
+                    log.trace("Login submission detected.  Attempting to execute login.");
+                }
+                return false;
+            } else {
+                if (log.isTraceEnabled()) {
+                    log.trace("Login page view.");
+                }
+                //allow them to see the login page ;)
+                return true;
+            }
+        } else {
+            Subject subject = getSubject(request, response);
+            return subject.isAuthenticated();
+        }
+    }
+
     /**
      * This default implementation merely returns <code>true</code> if the request is an HTTP <code>POST</code>,
      * <code>false</code> otherwise. Can be overridden by subclasses for custom login submission detection behavior.
